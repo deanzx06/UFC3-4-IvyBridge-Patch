@@ -9,7 +9,7 @@
 This repository provides an automated, link-time compatibility translation patch allowing **UFC 4 (PS4 Port / Portheon / SacredFire)** to run stably on legacy x86-64 processors lacking **BMI1**, **LZCNT**, or **MOVBE** instruction sets (specifically **Intel 2nd & 3rd Gen Core CPUs: Sandy Bridge & Ivy Bridge**, such as Core i7-3770, i5-3570, i7-2600, Xeon E3-1200 series).
 
 > **Important / Legal Notice**:
-> This patch **DOES NOT contain any copyrighted EA game binaries or assets (`eboot.bin`, `*.prx`, models, textures, audio)**.
+> This patch **DOES NOT contain any copyrighted game binaries or assets (`eboot.bin`, `*.prx`, models, textures, audio)**.
 > All translations are computed and linked locally on the user's machine directly from their own legally dumped game copy.
 
 ---
