@@ -1,4 +1,4 @@
-# EA Sports UFC 4 (PS4 Port) - Legacy CPU Compatibility Patch
+# UFC 4 (PS4 Port) - Legacy CPU Compatibility Patch
 
 [![Compatibility: Intel Ivy Bridge & Sandy Bridge](https://img.shields.io/badge/CPU%20Support-Ivy%20Bridge%20%7C%20Sandy%20Bridge-blue.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 [![Game: EA Sports UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204%20%2F%20CUSA14209-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
