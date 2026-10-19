@@ -14,7 +14,7 @@ This repository provides an automated, link-time compatibility translation patch
 ---
 
 ## 🥊 The Problem
-EA Sports UFC 4 (PS4) binaries compiled for the PlayStation 4's Jaguar APU utilize modern x86-64 instructions that do not exist on Intel Ivy Bridge (3rd Gen) and Sandy Bridge (2nd Gen) CPUs:
+UFC 4 (PS4) binaries compiled for the PlayStation 4's Jaguar APU utilize modern x86-64 instructions that do not exist on Intel Ivy Bridge (3rd Gen) and Sandy Bridge (2nd Gen) CPUs:
 - **BMI1**: `andn`, `bextr`, `blsr`, `blsi`, `blsmsk`, `tzcnt`
 - **LZCNT**: Leading Zero Count
 - **MOVBE**: Move Big-Endian (extensively used in audio and physics subsystems)
