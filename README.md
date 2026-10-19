@@ -44,11 +44,11 @@ On Sandy Bridge and Ivy Bridge systems, attempting to execute these instructions
 
 ---
 
-## 🚀 How to Use / Cara Pemasangan
+## 🚀 How to Use
 
-### Cara 1: Menggunakan Standalone Zip Release (Direkomendasikan)
-1. Unduh `UFC4_IvyBridge_Patch.zip` dari [Releases](https://github.com/deanzx06/UFC4-IvyBridge-Patch/releases).
-2. Ekstrak isi file zip ke dalam folder instalasi UFC 4 Anda (tempat file `eboot.bin` dan folder `scripts/` berada):
+### Method 1: Using the Standalone Zip Release (Recommended)
+1. Download `UFC4_IvyBridge_Patch.zip` from [Releases](https://github.com/deanzx06/UFC4-IvyBridge-Patch/releases).
+2. Extract the contents of the zip file into your UFC 4 installation directory (where `eboot.bin` and the `scripts/` folder are located):
    ```text
    games/UFC4/
    ├── bbport.ini
@@ -59,27 +59,27 @@ On Sandy Bridge and Ivy Bridge systems, attempting to execute these instructions
        ├── build_cpu_compat.py
        └── legacy_plan_data.py
    ```
-3. Jalankan game melalui launcher Portheon / SacredFire seperti biasa.
-   - Linker akan secara otomatis mendeteksi CPU Ivy Bridge/Sandy Bridge Anda melalui CPUID.
-   - File `out/boot-linked.bin` akan dihasilkan secara otomatis tanpa mengubah file game asli Anda.
+3. Launch the game using the Portheon / SacredFire launcher as usual.
+   - The linker automatically detects your Ivy Bridge/Sandy Bridge CPU via CPUID.
+   - `out/boot-linked.bin` will be generated automatically without modifying your original game files.
 
-### Cara 2: Manual Link via Python
-Jika Anda ingin me-link binary secara manual:
+### Method 2: Manual Linking via Python
+If you prefer to link the binary manually:
 ```bash
-python scripts/link_modules.py "path/ke/folder/game/UFC4"
+python scripts/link_modules.py "path/to/game/UFC4"
 ```
-Output patched guest binary akan tersimpan di `out/boot-linked.bin`.
+The patched guest binary output will be saved to `out/boot-linked.bin`.
 
 ---
 
-## ⚡ Performance Optimizations (Rekomendasi Setting)
+## ⚡ Performance Optimizations (Recommended Settings)
 
-Untuk mendapatkan performa maksimal pada CPU lawas (Ivy Bridge) yang dipadukan dengan GPU modern (misal RX 580 / GTX 1060):
+To achieve maximum performance on legacy CPUs (Ivy Bridge / Sandy Bridge) paired with modern graphics cards (e.g. RX 580 / GTX 1060):
 
-### 1. Aktifkan GPU Compute Skinning
-Di file patch/konfigurasi emulator (`UFC4-community.xml`):
+### 1. Enable GPU Compute Skinning
+In your emulator patch/configuration file (`UFC4-community.xml`):
 ```xml
-<!-- Mengalihkan beban animasi skinning dari CPU Ivy Bridge ke GPU Compute Units -->
+<!-- Offload skeletal skinning computations from the Ivy Bridge CPU to GPU Compute Units -->
 <Patch id="force-gpu-skinning" enabled="true">
     <Title>Skinning Method 2 (Force GPU Compute)</Title>
     ...
@@ -87,7 +87,7 @@ Di file patch/konfigurasi emulator (`UFC4-community.xml`):
 ```
 
 ### 2. Disable Object Motion Blur
-Mengurangi overhead vertex/pixel shader yang berat di UFC 4:
+Reduces heavy vertex/pixel shader overhead in UFC 4:
 ```xml
 <Patch id="disable-motion-blur" enabled="true">
     <Title>Disable Object Motion Blur</Title>
@@ -95,8 +95,8 @@ Mengurangi overhead vertex/pixel shader yang berat di UFC 4:
 </Patch>
 ```
 
-### 3. Konfigurasi `bbport.ini`
-Pastikan file `bbport.ini` memiliki:
+### 3. Configure `bbport.ini`
+Ensure your `bbport.ini` contains the following settings:
 ```ini
 [bbport]
 legacy_cpu=1
@@ -105,22 +105,22 @@ async_pipelines=1
 
 ---
 
-## 📊 Hasil Pengujian (Benchmark)
+## 📊 Benchmark & Test Results
 - **CPU**: Intel Core i7-3770 (Ivy Bridge, 4 cores / 8 threads @ 3.40 GHz - 3.90 GHz)
 - **RAM**: 16 GB DDR3
 - **GPU**: AMD Radeon RX 580 8GB
-- **Hasil**: Berjalan stabil 76,200+ frame berturut-turut (>21 menit pertarungan tanpa crash), Exit Code: `0`.
+- **Results**: Verified stable gameplay for 76,200+ consecutive frames (>21 minutes of active fight without a single crash or memory fault), Exit Code: `0`.
 
 ---
 
 ## 🤝 Upstream Pull Request
-Patch ini juga telah diajukan secara resmi sebagai kontribusi ke repositori utama UFC 4 PS4 Port:
-- **Pull Request**: [#1 - feat(compat): Ivy Bridge & Sandy Bridge legacy CPU compatibility](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
+This patch has also been formally submitted as an upstream contribution to the main UFC 4 PS4 Port repository:
+- **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
 
 ---
 
 ## 👏 Credits & Acknowledgments
-- **T0ug**: Proyek pelopor kompatibilitas Ivy Bridge pada [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
-- **Tim Pengembang Portheon & ShadPS4**: Untuk emulasi PS4 runtime dan guest-linker framework.
+- **T0ug**: Pioneer of the Ivy Bridge compatibility approach on [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
+- **Portheon & ShadPS4 Teams**: For the PS4 runtime emulation and guest-linker framework.
 - **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers.
-- **deanzx06**: Analisis target branch, mitigasi tabrakan jump offset audio engine, packaging & implementasi UFC 4.
+- **deanzx06**: Global branch target collision analysis, audio engine jump offset mitigation, packaging, and UFC 4 implementation.
