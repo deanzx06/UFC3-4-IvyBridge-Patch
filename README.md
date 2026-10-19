@@ -9,7 +9,7 @@
 This repository provides an automated, link-time compatibility translation patch allowing **UFC 4 (PS4 Port / Portheon / SacredFire)** to run stably on legacy x86-64 processors lacking **BMI1**, **LZCNT**, or **MOVBE** instruction sets (specifically **Intel 2nd & 3rd Gen Core CPUs: Sandy Bridge & Ivy Bridge**, such as Core i7-3770, i5-3570, i7-2600, Xeon E3-1200 series).
 
 > **Important / Legal Notice**:
-> This patch **DOES NOT contain any copyrighted game binaries or assets (`eboot.bin`, `*.prx`, models, textures, audio)**.
+> This patch **DOES NOT contain any copyrighted EA game binaries or assets (`eboot.bin`, `*.prx`, models, textures, audio)**.
 > All translations are computed and linked locally on the user's machine directly from their own legally dumped game copy.
 
 ---
@@ -47,7 +47,29 @@ On Sandy Bridge and Ivy Bridge systems, attempting to execute these instructions
 
 ## 🚀 How to Use
 
-### Method 1: Using the Standalone Zip Release (Recommended)
+### ⚠️ Prerequisite: Bypass Launcher CPU Check (`BB_SKIP_CPU_CHECK=1`)
+The SacredFire / Portheon launcher performs an initial hardware check and will refuse to open the game on 2nd and 3rd Generation Intel CPUs before our translation patch can take over. You **must** set the environment variable `BB_SKIP_CPU_CHECK=1` using either method below:
+
+#### Option A: Fast via Command Prompt / PowerShell (Recommended)
+Open Command Prompt (CMD) or PowerShell and run:
+```cmd
+setx BB_SKIP_CPU_CHECK 1
+```
+*(Restart your launcher or command window once for the variable to take effect permanently).*
+
+#### Option B: Manual via Windows System Properties (`sysdm.cpl`)
+1. Press `Win + R`, type `sysdm.cpl`, and press **Enter** to open **System Properties**.
+2. Click the **Advanced** tab, then click the **Environment Variables...** button at the bottom.
+3. Under **User variables for <YourUsername>** (or **System variables**), click **New...**:
+   - **Variable name**: `BB_SKIP_CPU_CHECK`
+   - **Variable value**: `1`
+4. Click **OK** on all dialog boxes to save and apply the setting.
+
+---
+
+### Step 2: Applying the Patch
+
+#### Method 1: Using the Standalone Zip Release (Recommended)
 1. Download `UFC4_IvyBridge_Patch.zip` from [Releases](https://github.com/deanzx06/UFC4-IvyBridge-Patch/releases).
 2. Extract the contents of the zip file into your UFC 4 installation directory (where `eboot.bin` and the `scripts/` folder are located):
    ```text
@@ -64,7 +86,7 @@ On Sandy Bridge and Ivy Bridge systems, attempting to execute these instructions
    - The linker automatically detects your Ivy Bridge/Sandy Bridge CPU via CPUID.
    - `out/boot-linked.bin` will be generated automatically without modifying your original game files.
 
-### Method 2: Manual Linking via Python
+#### Method 2: Manual Linking via Python
 If you prefer to link the binary manually:
 ```bash
 python scripts/link_modules.py "path/to/game/UFC4"
@@ -121,7 +143,7 @@ This patch has also been formally submitted as an upstream contribution to the m
 ---
 
 ## 🤖 Authorship & Development
-This compatibility fix was engineered and developed by **Antigravity (Google DeepMind Advanced Agentic Coding)**:
+This compatibility fix was engineered and developed by **Antigravity (Google DeepMind Advanced Agentic Coding)** in pair programming collaboration with **[@deanzx06](https://github.com/deanzx06)**:
 - **Root Cause & Crash Analysis**: Disassembled and analyzed all 9,690 unsupported BMI1/LZCNT/MOVBE sites and 630,394 incoming branch targets in `eboot.bin` to trace the audio thread crash at `0x186dc66`.
 - **Engineering & Implementation**: Designed the backward spanning logic, 2-byte short jump stub via function alignment NOPs (`0x186dcc1`), SysV ABI trampoline injection engine, and link-time `libc.prx` strlen baseline replacement.
 - **Packaging & Tooling**: Created the portable zero-dependency LZMA-compressed fallback plan (`legacy_plan_data.py`), configuration integration, and distribution package.
@@ -130,6 +152,7 @@ This compatibility fix was engineered and developed by **Antigravity (Google Dee
 
 ## 👏 Credits & Acknowledgments
 - **Antigravity (Google DeepMind)**: Full automated engineering, binary analysis, instruction translation engine, and crash mitigation.
+- **deanzx06**: Project lead, hardware testing, validation on Intel Ivy Bridge (Core i7-3770), and distribution.
 - **T0ug**: Pioneer of the Ivy Bridge compatibility approach on [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
 - **Portheon & ShadPS4 Teams**: For the PS4 runtime emulation and guest-linker framework.
 - **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers.
