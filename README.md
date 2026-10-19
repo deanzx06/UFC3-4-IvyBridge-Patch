@@ -1,11 +1,11 @@
 # UFC 4 (PS4 Port) - Legacy CPU Compatibility Patch
 
 [![Compatibility: Intel Ivy Bridge & Sandy Bridge](https://img.shields.io/badge/CPU%20Support-Ivy%20Bridge%20%7C%20Sandy%20Bridge-blue.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
-[![Game: EA Sports UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204%20%2F%20CUSA14209-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
+[![Game: UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204%20%2F%20CUSA14209-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 [![Upstream PR](https://img.shields.io/badge/Pull%20Request-%231%20Open-green.svg)](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
 [![Status: Verified Working](https://img.shields.io/badge/Testing-76%2C200%2B%20frames%20smooth-success.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 
-This repository provides an automated, link-time compatibility translation patch allowing **EA Sports UFC 4 (PS4 Port / Portheon / SacredFire)** to run stably on legacy x86-64 processors lacking **BMI1**, **LZCNT**, or **MOVBE** instruction sets (specifically **Intel 2nd & 3rd Gen Core CPUs: Sandy Bridge & Ivy Bridge**, such as Core i7-3770, i5-3570, i7-2600, Xeon E3-1200 series).
+This repository provides an automated, link-time compatibility translation patch allowing **UFC 4 (PS4 Port / Portheon / SacredFire)** to run stably on legacy x86-64 processors lacking **BMI1**, **LZCNT**, or **MOVBE** instruction sets (specifically **Intel 2nd & 3rd Gen Core CPUs: Sandy Bridge & Ivy Bridge**, such as Core i7-3770, i5-3570, i7-2600, Xeon E3-1200 series).
 
 > **Important / Legal Notice**:
 > This patch **DOES NOT contain any copyrighted EA game binaries or assets (`eboot.bin`, `*.prx`, models, textures, audio)**.
