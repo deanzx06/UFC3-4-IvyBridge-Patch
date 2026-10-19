@@ -152,7 +152,6 @@ This compatibility fix was engineered and developed by **Antigravity (Google Dee
 
 ## 👏 Credits & Acknowledgments
 - **Antigravity (Google DeepMind)**: Full automated engineering, binary analysis, instruction translation engine, and crash mitigation.
-- **deanzx06**: Project lead, hardware testing, validation on Intel Ivy Bridge (Core i7-3770), and distribution.
 - **T0ug**: Pioneer of the Ivy Bridge compatibility approach on [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
 - **Portheon & ShadPS4 Teams**: For the PS4 runtime emulation and guest-linker framework.
 - **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers.
