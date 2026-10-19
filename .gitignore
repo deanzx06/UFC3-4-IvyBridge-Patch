@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Game binaries & dumps (never commit copyrighted game assets!)
+eboot.bin
+*.prx
+*.self
+boot-linked.bin
+out/
+build/
+*.tmp
+*.log
+*.zip
+
+# Environment & IDE
+.vscode/
+.idea/
