@@ -143,7 +143,7 @@ This patch has also been formally submitted as an upstream contribution to the m
 ---
 
 ## 🤖 Authorship & Development
-This compatibility fix was engineered and developed by **Antigravity (Google DeepMind Advanced Agentic Coding)** in pair programming collaboration with **[@deanzx06](https://github.com/deanzx06)**:
+This compatibility fix was engineered and developed by **Antigravity (Google DeepMind Advanced Agentic Coding)**:
 - **Root Cause & Crash Analysis**: Disassembled and analyzed all 9,690 unsupported BMI1/LZCNT/MOVBE sites and 630,394 incoming branch targets in `eboot.bin` to trace the audio thread crash at `0x186dc66`.
 - **Engineering & Implementation**: Designed the backward spanning logic, 2-byte short jump stub via function alignment NOPs (`0x186dcc1`), SysV ABI trampoline injection engine, and link-time `libc.prx` strlen baseline replacement.
 - **Packaging & Tooling**: Created the portable zero-dependency LZMA-compressed fallback plan (`legacy_plan_data.py`), configuration integration, and distribution package.
