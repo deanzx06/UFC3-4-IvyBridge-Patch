@@ -125,6 +125,7 @@ Ensure your `bbport.ini` contains the following settings:
 legacy_cpu=1
 async_pipelines=1
 ```
+## Notes: Runs from SacredFire launcher on games folder if blocked on Pathreon launcher.
 
 ---
 
