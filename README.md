@@ -86,6 +86,10 @@ setx BB_SKIP_CPU_CHECK 1
    - The linker automatically detects your Ivy Bridge/Sandy Bridge CPU via CPUID.
    - `out/boot-linked.bin` will be generated automatically without modifying your original game files.
 
+## Notes: Runs from SacredFire launcher on games folder if blocked on Pathreon launcher.
+
+---
+
 #### Method 2: Manual Linking via Python
 If you prefer to link the binary manually:
 ```bash
@@ -125,7 +129,6 @@ Ensure your `bbport.ini` contains the following settings:
 legacy_cpu=1
 async_pipelines=1
 ```
-## Notes: Runs from SacredFire launcher on games folder if blocked on Pathreon launcher.
 
 ---
 
