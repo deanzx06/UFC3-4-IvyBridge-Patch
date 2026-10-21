@@ -4,7 +4,6 @@
 [![Game: UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204%20%2F%20CUSA14209-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 [![Upstream PR](https://img.shields.io/badge/Pull%20Request-%231%20Open-green.svg)](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
 [![Status: Verified Working](https://img.shields.io/badge/Testing-76%2C200%2B%20frames%20smooth-success.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
-[![Engineered by Antigravity](https://img.shields.io/badge/Engineered%20by-Antigravity%20(Google%20DeepMind)-8A2BE2.svg)](https://deepmind.google/)
 
 This repository provides an automated, link-time compatibility translation patch allowing **UFC 4 (PS4 Port / Portheon / SacredFire)** to run stably on legacy x86-64 processors lacking **BMI1**, **LZCNT**, or **MOVBE** instruction sets (specifically **Intel 2nd & 3rd Gen Core CPUs: Sandy Bridge & Ivy Bridge**, such as Core i7-3770, i5-3570, i7-2600, Xeon E3-1200 series).
 
@@ -147,7 +146,7 @@ This patch has also been formally submitted as an upstream contribution to the m
 ---
 
 ## 🤖 Authorship & Development
-This compatibility fix by deanzx06 with AI assisted **Antigravity (Google DeepMind Advanced Agentic Coding)**:
+This compatibility patched by deanzx06 with AI assisted:
 - **Root Cause & Crash Analysis**: Disassembled and analyzed all 9,690 unsupported BMI1/LZCNT/MOVBE sites and 630,394 incoming branch targets in `eboot.bin` to trace the audio thread crash at `0x186dc66`.
 - **Engineering & Implementation**: Designed the backward spanning logic, 2-byte short jump stub via function alignment NOPs (`0x186dcc1`), SysV ABI trampoline injection engine, and link-time `libc.prx` strlen baseline replacement.
 - **Packaging & Tooling**: Created the portable zero-dependency LZMA-compressed fallback plan (`legacy_plan_data.py`), configuration integration, and distribution package.
@@ -155,7 +154,6 @@ This compatibility fix by deanzx06 with AI assisted **Antigravity (Google DeepMi
 ---
 
 ## 👏 Credits & Acknowledgments
-- **Antigravity (Google DeepMind)**: Full automated engineering, binary analysis, instruction translation engine, and crash mitigation.
 - **T0ug**: Pioneer of the Ivy Bridge compatibility approach on [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
 - **Portheon & ShadPS4 Teams**: For the PS4 runtime emulation and guest-linker framework.
 - **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers.
