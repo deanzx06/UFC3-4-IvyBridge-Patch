@@ -126,4 +126,4 @@ This compatibility patched by deanzx06 with AI assisted:
 ## 👏 Credits & Acknowledgments
 - **T0ug**: Pioneer of the Ivy Bridge compatibility approach on [`bloodborne_pc_Ivy-Bridge`](https://github.com/T0ug/bloodborne_pc_Ivy-Bridge).
 - **Portheon & ShadPS4 Teams**: For the PS4 runtime emulation and guest-linker framework.
-- **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers (https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS).
+- **XAndromedaXR & GNSB**: UFC 4 PS4 Port project & community maintainers [`UFC-3-PS4-PORT-LINUX-WINDOWS`] (https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS).
