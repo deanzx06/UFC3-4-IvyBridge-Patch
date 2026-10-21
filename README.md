@@ -98,37 +98,6 @@ The patched guest binary output will be saved to `out/boot-linked.bin`.
 
 ---
 
-## ⚡ Performance Optimizations (Recommended Settings)
-
-To achieve maximum performance on legacy CPUs (Ivy Bridge / Sandy Bridge) paired with modern graphics cards (e.g. RX 580 / GTX 1060):
-
-### 1. Enable GPU Compute Skinning
-In your emulator patch/configuration file (`UFC4-community.xml`):
-```xml
-<!-- Offload skeletal skinning computations from the Ivy Bridge CPU to GPU Compute Units -->
-<Patch id="force-gpu-skinning" enabled="true">
-    <Title>Skinning Method 2 (Force GPU Compute)</Title>
-    ...
-</Patch>
-```
-
-### 2. Disable Object Motion Blur
-Reduces heavy vertex/pixel shader overhead in UFC 4:
-```xml
-<Patch id="disable-motion-blur" enabled="true">
-    <Title>Disable Object Motion Blur</Title>
-    ...
-</Patch>
-```
-
-### 3. Configure `bbport.ini`
-Ensure your `bbport.ini` contains the following settings:
-```ini
-[bbport]
-legacy_cpu=1
-async_pipelines=1
-```
-
 ---
 
 ## 📊 Benchmark & Test Results
@@ -141,6 +110,7 @@ async_pipelines=1
 
 ## 🤝 Upstream Pull Request
 This patch has also been formally submitted as an upstream contribution to the main UFC 4 PS4 Port repository:
+- **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)]([https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1](https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS/pull/48))
 - **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
 
 ---
