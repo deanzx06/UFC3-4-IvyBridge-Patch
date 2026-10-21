@@ -110,7 +110,7 @@ The patched guest binary output will be saved to `out/boot-linked.bin`.
 
 ## 🤝 Upstream Pull Request
 This patch has also been formally submitted as an upstream contribution to the main UFC 4 PS4 Port repository:
-- **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)]([https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1](https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS/pull/48))
+- **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)](https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS/pull/48)
 - **Pull Request**: [#1 - feat: Add legacy CPU compatibility (Intel Ivy Bridge / Sandy Bridge support)](https://github.com/XAndromedaXR/UFC-4-PS4-PORT/pull/1)
 
 ---
