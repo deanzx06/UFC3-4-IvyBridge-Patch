@@ -72,7 +72,7 @@ setx BB_SKIP_CPU_CHECK 1
 ### Step 2: Applying the Patch
 
 #### Method 1: Using the Standalone Zip Release (Recommended)
-1. Download `UFC4_IvyBridge_Patch.zip` from [Releases](https://github.com/deanzx06/UFC4-IvyBridge-Patch/releases).
+1. Download `UFC3/4_IvyBridge_Patch.zip` from [Releases](https://github.com/deanzx06/UFC4-IvyBridge-Patch/releases).
 2. Extract the contents of the zip file into your UFC 4 installation directory (where `scripts/` folder are located):
    ```text
    games/UFC4/
