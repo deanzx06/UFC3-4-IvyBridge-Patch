@@ -46,10 +46,10 @@ On Sandy Bridge and Ivy Bridge systems, attempting to execute these instructions
 
 ## 🚀 How to Use
 
-## Dump of The Game
+### Dump of The Game
 A dump of the game: the `CUSA06534 UFC3` `CUSA14204 UFC4` never tested on another region dump of the game.
 
-### ⚠️ Prerequisite: Bypass Launcher CPU Check (`BB_SKIP_CPU_CHECK=1`)
+#### ⚠️ Prerequisite: Bypass Launcher CPU Check (`BB_SKIP_CPU_CHECK=1`)
 The SacredFire / Portheon launcher performs an initial hardware check and will refuse to open the game on 2nd and 3rd Generation Intel CPUs before our translation patch can take over. You **must** set the environment variable `BB_SKIP_CPU_CHECK=1` using either method below:
 
 #### Option A: Fast via Command Prompt / PowerShell (Recommended)
