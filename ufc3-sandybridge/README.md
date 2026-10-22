@@ -1,83 +1,97 @@
-# EA SPORTS UFC 3 PS4 Port - Sandy Bridge & Legacy CPU Compatibility Patch v2
+# EA SPORTS UFC 3 PS4 Port - Sandy Bridge & Legacy CPU Compatibility Patch
 
-Patch kompatibilitas untuk menjalankan **EA SPORTS UFC 3 PS4 Port (CUSA06534)** pada prosesor lawas **Intel Sandy Bridge (Core Generasi ke-2: i3/i5/i7-2xxx, Xeon E3-12xx v1)** serta kompatibel penuh dengan **Ivy Bridge (Core Generasi ke-3 / Xeon v2)**.
-
----
-
-## Pembaruan di Versi v2:
-* **Perbaikan Fatal Crash saat Loading 100% (`read access to 0000000000000001 at guest offset 0x12131cf`)**:
-  Menambahkan proteksi CPU EFLAGS (`pushfq` / `popfq`) pada seluruh 331 titik translasi instruksi F16C (`vcvtph2ps` dan `vcvtps2ph`). Pada versi v1, operasi aritmetika pada trampoline emulasi F16C secara tidak sengaja merusak Zero Flag (ZF) dari instruksi pembanding objek sebelumnya (`test r9, r9`), mengakibatkan compiler salah mengambil percabangan memori vertex 3D saat inisialisasi match/in-game.
-* **Preservasi Subnormal / DAZ**:
-  Menambahkan penanganan float subnormal pada konversi half-float agar selaras dengan standar engine game x86-64 (Denormals-Are-Zero).
-* **Pembaruan Unit Test Suite**:
-  Ditambahkan unit test verifikasi proteksi register flag EFLAGS untuk memastikan integritas logika percabangan game.
+Compatibility patch to run **EA SPORTS UFC 3 PS4 Port (CUSA06534)** on legacy **Intel Sandy Bridge (2nd Gen Core: i3/i5/i7-2xxx, Xeon E3-12xx v1)** processors, with full backward compatibility for **Ivy Bridge (3rd Gen Core / Xeon v2)**.
 
 ---
 
-## Mengapa Patch Khusus Sandy Bridge Diperlukan?
+## Updates in thid Version:
 
-Prosesor PS4 (AMD Jaguar) menggunakan arsitektur x86-64 dengan set instruksi modern:
-1. **BMI1** (`andn`, `bextr`, `blsi`, `blsr`, `blsmsk`, `tzcnt`) - *Tidak ada di Sandy Bridge maupun Ivy Bridge*
-2. **MOVBE** - *Tidak ada di Sandy Bridge maupun Ivy Bridge*
-3. **LZCNT** - *Tidak ada di Sandy Bridge maupun Ivy Bridge*
-4. **F16C** (`vcvtph2ps`, `vcvtps2ph` - Half-Precision 16-bit Float Conversion) - *Ada di Ivy Bridge, tetapi **TIDAK ADA di Sandy Bridge***
-
-Patch Ivy Bridge standar hanya mentranslasikan BMI1/MOVBE/LZCNT. Pada Sandy Bridge, prosesor akan mengalami crash `SIGILL (Illegal Instruction)` ketika game mengeksekusi instruksi konversi Float16 (F16C) pada sistem rendering 3D, mesh, dan animasi.
-
-Patch Sandy Bridge ini menyertakan seluruh translasi instruksi BMI1/MOVBE/LZCNT **ditambah emulasi penuh untuk 331 instruksi F16C**.
+* **Fixed Fatal Crash at 100% Loading (`read access to 0000000000000001 at guest offset 0x12131cf`)**:
+Added CPU EFLAGS protection (`pushfq` / `popfq`) across all 331 F16C instruction translation sites (`vcvtph2ps` and `vcvtps2ph`). In v1, arithmetic operations within the F16C emulation trampoline inadvertently clobbered the Zero Flag (ZF) set by preceding object comparison instructions (`test r9, r9`), causing the compiler to take the wrong 3D vertex memory branch during match/in-game initialization.
+* **Subnormal / DAZ Preservation**:
+Added subnormal float handling for half-float conversions to align with x86-64 game engine standards (Denormals-Are-Zero).
+* **Updated Unit Test Suite**:
+Added unit tests verifying EFLAGS register flag protection to ensure game branching logic integrity.
 
 ---
 
-## Statistik & Rincian Translasi
+## Why is a Dedicated Sandy Bridge Patch Needed?
 
-* **Total Instruksi Ditranslasikan**: **6.486 sites** (100% lengkap)
-* **Instruksi Tidak Tertangani (Unhandled)**: **0 sites**
-* **Rincian Per Instruksi**:
-  * `andn`: 2.930 sites
-  * `bextr`: 2.572 sites
-  * `movbe`: 414 sites (termasuk 95 in-place `bswap` optimization)
-  * `vcvtph2ps` (F16C): **211 sites** (konversi Float16 ke Float32)
-  * `vcvtps2ph` (F16C): **120 sites** (konversi Float32 ke Float16)
-  * `lzcnt`: 121 sites
-  * `tzcnt`: 60 sites
-  * `blsi`: 56 sites
-  * `blsr`: 1 site
-  * `blsmsk`: 1 site
+The PS4 processor (AMD Jaguar) uses the x86-64 architecture with modern instruction sets:
+
+1. **BMI1** (`andn`, `bextr`, `blsi`, `blsr`, `blsmsk`, `tzcnt`) - *Missing on both Sandy Bridge and Ivy Bridge*
+2. **MOVBE** - *Missing on both Sandy Bridge and Ivy Bridge*
+3. **LZCNT** - *Missing on both Sandy Bridge and Ivy Bridge*
+4. **F16C** (`vcvtph2ps`, `vcvtps2ph` - Half-Precision 16-bit Float Conversion) - *Present on Ivy Bridge, but **MISSING on Sandy Bridge***
+
+Standard Ivy Bridge patches only translate BMI1/MOVBE/LZCNT. On Sandy Bridge, the processor triggers a `SIGILL (Illegal Instruction)` crash whenever the game executes Float16 conversion instructions (F16C) in the 3D rendering, mesh, and animation systems.
+
+This Sandy Bridge patch includes all BMI1/MOVBE/LZCNT instruction translations **plus full emulation for 331 F16C instructions**.
 
 ---
 
-## Cara Pemasangan
+## Statistics & Translation Details
 
-### Opsi A: Menggunakan PowerShell (Otomatis)
-1. Ekstrak file zip patch ini.
-2. Buka PowerShell dan jalankan:
-   ```powershell
-   .\apply_patch.ps1 -UFC3Path "D:\Path\Ke\Folder\UFC3Native"
-   ```
-3. Pastikan environment variable `BB_SKIP_CPU_CHECK` sudah aktif:
-   ```cmd
-   setx BB_SKIP_CPU_CHECK 1
-   ```
-4. Jalankan game melalui `UFC3.exe`.
+* **Total Instructions Translated**: **6,486 sites** (100% complete)
+* **Unhandled Instructions**: **0 sites**
+* **Breakdown by Instruction**:
+* `andn`: 2,930 sites
+* `bextr`: 2,572 sites
+* `movbe`: 414 sites (including 95 in-place `bswap` optimizations)
+* `vcvtph2ps` (F16C): **211 sites** (Float16 to Float32 conversion)
+* `vcvtps2ph` (F16C): **120 sites** (Float32 to Float16 conversion)
+* `lzcnt`: 121 sites
+* `tzcnt`: 60 sites
+* `blsi`: 56 sites
+* `blsr`: 1 site
+* `blsmsk`: 1 site
 
-### Opsi B: Pemasangan Manual
-1. Salin seluruh isi folder `scripts/` ke folder `scripts/` pada game UFC 3 kamu.
-2. Salin seluruh isi folder `tools/` ke folder `tools/` pada game UFC 3 kamu.
-3. Salin file `bbport.ini` ke folder utama game UFC 3 kamu (pastikan berisi `legacy_cpu=1`).
-4. Setel environment variable `BB_SKIP_CPU_CHECK=1` di Windows.
-5. Jalankan `UFC3.exe`.
+
 
 ---
 
-## Fitur Teknis & Keamanan
-* **Zero Proprietary Bytes**: Dataset plan tidak menyimpan byte kode game, bebas dari pelanggaran hak cipta/redistribusi biner.
-* **Smart Binary Detection**: Kompatibel baik dengan rilis publik saat ini (`v0.1.11` s/d `v0.1.14`) maupun update build upstream mendatang (`probe.c` relaxation).
-* **Paritas Byte-for-Byte**: Jika fitur dinonaktifkan (`BB_LEGACY_CPU=0`), output biner identik 100% dengan hash resmi upstream (`cea8cdf4...`).
-* **Unit Test Suite**: Disertai 12 unit test otomatis di `tests/test_cpu_compat.py` yang memverifikasi presisi konversi matematika IEEE 754.
+## Installation Guide
+
+### Option A: Using PowerShell (Automated)
+
+1. Extract this patch zip file.
+2. Open PowerShell and run:
+```powershell
+.\apply_patch.ps1 -UFC3Path "D:\Path\To\UFC3Native"
+
+```
+
+
+3. Ensure the `BB_SKIP_CPU_CHECK` environment variable is set:
+```cmd
+setx BB_SKIP_CPU_CHECK 1
+
+```
+
+
+4. Launch the game via `UFC3.exe`.
+
+### Option B: Manual Installation
+
+1. Copy the entire contents of the `scripts/` folder to the `scripts/` folder of your UFC 3 game directory.
+2. Copy the entire contents of the `tools/` folder to the `tools/` folder of your UFC 3 game directory.
+3. Copy the `bbport.ini` file to the root UFC 3 game folder (ensure it contains `legacy_cpu=1`).
+4. Set the environment variable `BB_SKIP_CPU_CHECK=1` in Windows.
+5. Launch `UFC3.exe`.
 
 ---
 
-## Lisensi & Kredit
-* Berlisensi **GPL-2.0-only** sesuai lisensi upstream UFC 3 Port.
-* Dikembangkan oleh **@deanzx06** dengan *AI-assisted engineering*.
-* Mengembangkan karya pionir dari T0ug (`T0ug/bloodborne_pc_Ivy-Bridge`) dan Supermedo (`deadinside28/bloodborne_pc`).
+## Technical & Safety Features
+
+* **Zero Proprietary Bytes**: Plan datasets contain no game code bytes, free from copyright infringement or binary redistribution issues.
+* **Smart Binary Detection**: Compatible with current public releases (`v0.1.11` through `v0.1.14`) as well as future upstream builds (`probe.c` relaxation).
+* **Byte-for-Byte Parity**: When the feature is disabled (`BB_LEGACY_CPU=0`), the binary output is 100% identical to the official upstream hash (`cea8cdf4...`).
+* **Unit Test Suite**: Includes 12 automated unit tests in `tests/test_cpu_compat.py` verifying IEEE 754 mathematical conversion precision.
+
+---
+
+## License & Credits
+
+* Licensed under **GPL-2.0-only**, consistent with the upstream UFC 3 Port license.
+* Developed by **@deanzx06** with *AI-assisted engineering*.
+* Builds upon pioneering work by T0ug (`T0ug/bloodborne_pc_Ivy-Bridge`) and Supermedo (`deadinside28/bloodborne_pc`).
