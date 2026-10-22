@@ -1,7 +1,7 @@
 # UFC 3 & 4 (PS4 Port) - Legacy CPU Compatibility Patch
 
 [![Compatibility: Intel Ivy Bridge & Sandy Bridge](https://img.shields.io/badge/CPU%20Support-Ivy%20Bridge%20%7C%20Sandy%20Bridge-blue.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
-[![Game: UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204%20%2F%20CUSA14209-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
+[![Game: UFC 4 PS4](https://img.shields.io/badge/Game-CUSA14204UFC4%20%2F%20CUSA06534UFC3-red.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 [![Upstream PR](https://img.shields.io/badge/Pull%20Request-%231%20Open-green.svg)](https://github.com/GNSB/UFC-3-PS4-PORT-LINUX-WINDOWS/pull/48)
 [![Status: Verified Working](https://img.shields.io/badge/Testing-76%2C200%2B%20frames%20smooth-success.svg)](https://github.com/deanzx06/UFC4-IvyBridge-Patch)
 
