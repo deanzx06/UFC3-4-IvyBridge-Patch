@@ -179,7 +179,7 @@ def main():
                         plan['sites'].append({
                             'module': name,
                             'address': addr,
-                            'bytes': bytes(mod['elf'][at:at+length]).hex(),
+                            'length': length,
                             'body': rep.hex(),
                             'instruction': f'{mnem} {op}',
                             'rip_fixups': []
@@ -195,7 +195,7 @@ def main():
                             plan['sites'].append({
                                 'module': name,
                                 'address': addr,
-                                'bytes': bytes(mod['elf'][at:at+4]).hex(),
+                                'length': 4,
                                 'patch': 'eb599090',
                                 'stub_address': 0x186dcc1,
                                 'body': rep.hex(),
@@ -223,7 +223,7 @@ def main():
                                 plan['sites'].append({
                                     'module': name,
                                     'address': addr,
-                                    'bytes': combined_bytes.hex(),
+                                    'length': span_len,
                                     'body': rep1.hex(),
                                     'instruction': f'{i1.mnemonic} {i1.op_str} [spanned with jmp to {hex(i2.operands[0].imm)}]',
                                     'return_target': i2.operands[0].imm,
@@ -242,7 +242,7 @@ def main():
                                 plan['sites'].append({
                                     'module': name,
                                     'address': addr,
-                                    'bytes': combined_bytes.hex(),
+                                    'length': span_len,
                                     'body': combined_body.hex(),
                                     'instruction': f'{i1.mnemonic} {i1.op_str} [spanned with {i2.mnemonic}]',
                                     'rip_fixups': []
@@ -265,7 +265,7 @@ def main():
                                 plan['sites'].append({
                                     'module': name,
                                     'address': i0.address,
-                                    'bytes': combined_bytes.hex(),
+                                    'length': span_len,
                                     'body': combined_body.hex(),
                                     'instruction': f'{i1.mnemonic} {i1.op_str} [backward spanned with {i0.mnemonic}]',
                                     'return_target': i1.address + i1.size,

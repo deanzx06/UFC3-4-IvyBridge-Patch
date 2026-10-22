@@ -193,13 +193,14 @@ def patch_image(image, segments, main, modules, relocations, *, plan=None, activ
         if name not in locations:
             continue
         address = site['address']
-        original = bytes.fromhex(site['bytes'])
+        original = bytes.fromhex(site['bytes']) if 'bytes' in site else None
+        length = site.get('length', len(original) if original else 0)
         body = bytearray(bytes.fromhex(site['body']))
         base, _ = locations[name]
         start = base + address
-        end = start + len(original)
+        end = start + length
 
-        if image[start:end] != original:
+        if original is not None and image[start:end] != original:
             continue
 
         cursor = (cursor + 15) & ~15
@@ -221,7 +222,7 @@ def patch_image(image, segments, main, modules, relocations, *, plan=None, activ
             go = b'\xe9' + _relative(cursor, start + 5, f"{name}+{address:#x}")
             ret_addr = base + site['return_target'] if 'return_target' in site else end
             back = b'\xe9' + _relative(ret_addr, cursor + len(body) + 5, f"{name}+{address:#x}")
-            operations.append((start, end, cursor, bytes(body) + back, go + b'\x90' * (len(original) - 5)))
+            operations.append((start, end, cursor, bytes(body) + back, go + b'\x90' * (length - 5)))
         cursor += len(body) + 5
         counts[site['instruction'].split()[0]] += 1
 
